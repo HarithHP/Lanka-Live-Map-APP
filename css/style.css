@@ -1,0 +1,42 @@
+body{
+    background-color: #776f6f;
+}
+
+.mapdiv{
+    width:28%;
+    margin: auto;
+}
+
+.mapdiv path {
+    fill: #00cc9c;
+    stroke: #ffffff;
+    stroke-width:4px;
+    transition: fill 0.3s;
+}
+
+.mapdiv :hover {
+    fill: #000000;
+}
+
+.weather-info-container {
+    width: 40%; /* Adjust as needed */
+    padding: 0 20px; /* Adjust as needed */
+}
+
+.weather-info {
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.weather-info h2 {
+    margin-top: 0;
+}
+
+.label{
+    padding: 30px 100px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #130f40;
+    font-family:"Mongolian Baiti";
+}
