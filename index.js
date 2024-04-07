@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function fetchDataPeriodically(bearerToken) {
     setInterval(() => {
         fetchDataForAllDistricts(bearerToken);
-    }, 5000); // 5 seconds in milliseconds
+    }, 86400000); // Please be advised that due to our free hosting plan's limitations, we kindly request limiting API calls to one per day to avoid exceeding the allocated usage
 }
 
 function fetchDataForAllDistricts(bearerToken) {
