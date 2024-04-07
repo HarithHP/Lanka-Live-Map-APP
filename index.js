@@ -1,50 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const token = fetchLoginToken();
-    if (!token) {
-        console.error('Token not found. Please ensure you are logged in.');
-        return;
-    }
+    const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imhhcml0aEBnbWFpbC5jb20iLCJpYXQiOjE3MTI0OTYzOTJ9.N6gAKQ4g5Kffhrrkhv9Ca5xC6W079ls1rm2KE0nrBko';
 
     // Attach click event listeners to each district
     const districts = document.querySelectorAll('path[name]');
     districts.forEach(district => {
         district.addEventListener('click', () => {
             const districtName = district.getAttribute('name');
-            fetchData(districtName, token)
+            fetchData(districtName, bearerToken)
                 .then(data => displayWeatherData(data, districtName))
                 .catch(error => console.error('Error fetching or displaying data:', error));
         });
     });
 
     // Fetch data initially and then every 5 seconds
-    fetchDataPeriodically(token);
+    fetchDataPeriodically(bearerToken);
 });
 
-function fetchLoginToken() {
-    return localStorage.getItem('token');
-}
-
-function fetchDataPeriodically(token) {
+function fetchDataPeriodically(bearerToken) {
     setInterval(() => {
-        fetchDataForAllDistricts(token);
+        fetchDataForAllDistricts(bearerToken);
     }, 5000); // 5 seconds in milliseconds
 }
 
-function fetchDataForAllDistricts(token) {
+function fetchDataForAllDistricts(bearerToken) {
     const districts = document.querySelectorAll('path[name]');
     districts.forEach(district => {
         const districtName = district.getAttribute('name');
-        fetchData(districtName, token)
+        fetchData(districtName, bearerToken)
             .catch(error => console.error('Error fetching data for', districtName, ':', error));
     });
 }
 
-function fetchData(districtName, token) {
-    const apiUrl = `https://jade-nice-deer.cyclic.app/wcast/getnonExpired?district=${districtName}`;
+function fetchData(districtName, bearerToken) {
+    const apiUrl = `https://weatherapp-backendnew.onrender.com/wcast/getnonExpired?district=${districtName}`;
 
     return fetch(apiUrl, {
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${bearerToken}`,
             'Content-Type': 'application/json'
         }
     })
